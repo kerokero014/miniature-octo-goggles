@@ -11,8 +11,8 @@ export default function MainHeader() {
               className="h-8 w-auto"
               src="/imgs/logo.png"
               alt="logo"
-              width={200}
-              height={200}
+              width={400}
+              height={400}
             />
           </a>
         </div>
