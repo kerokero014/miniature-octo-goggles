@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Head from 'next/head';
 
+import Header from './components/MainHeader';
+import { Main } from 'next/document';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -20,7 +23,11 @@ export default function RootLayout({
       <Head>
         <a href="/favicon.ico" rel="icon" />
       </Head>
-      <body className="bg-slate-300">{children}</body>
+
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
