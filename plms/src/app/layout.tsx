@@ -4,6 +4,8 @@ import './globals.css';
 import Head from 'next/head';
 
 import Header from './components/MainHeader';
+import Footer from './components/MainFooter';
+
 import { Main } from 'next/document';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -24,10 +26,7 @@ export default function RootLayout({
         <a href="/favicon.ico" rel="icon" />
       </Head>
 
-      <body>
-        <Header />
-        {children}
-      </body>
+      <body className="bg-purple-200">{children}</body>
     </html>
   );
 }

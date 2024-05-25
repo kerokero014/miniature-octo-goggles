@@ -11,8 +11,8 @@ export default function MainHeader() {
               className="h-8 w-auto"
               src="/imgs/logo.png"
               alt="logo"
-              width={400}
-              height={400}
+              width={100}
+              height={100}
             />
           </a>
         </div>
@@ -40,16 +40,16 @@ export default function MainHeader() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Product
+            Files
           </a>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Features
+            Images
           </a>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Marketplace
+            Notes
           </a>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
+            Links
           </a>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -94,25 +94,25 @@ export default function MainHeader() {
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Product
+                  Files
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Features
+                  Images
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Marketplace
+                  Notes
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Company
+                  Links
                 </a>
               </div>
               <div className="py-6">
