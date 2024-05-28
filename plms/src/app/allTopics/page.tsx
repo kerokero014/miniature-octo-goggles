@@ -26,9 +26,11 @@ export default function Page() {
           <h1 className="text-black-500 mt-10 justify-center text-center text-4xl font-bold">
             Your Topics
           </h1>
+
           <main className="m-8 flex min-h-80 items-center justify-center">
             <TopicsCards />
           </main>
+
           <Footer />
         </div>
 
