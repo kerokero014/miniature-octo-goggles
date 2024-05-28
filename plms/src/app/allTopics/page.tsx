@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '../components/MainFooter';
-import Header from '../components/MainHeader';
+import Header from '../components/SecondaryHeader';
 import TopicsCards from '../components/TopicsCards';
 
 export default function Page() {
@@ -23,10 +23,6 @@ export default function Page() {
 
         <div className="relative isolate px-6 pt-14 lg:px-8">
           <Header />
-          <h1 className="text-black-500 mt-10 justify-center text-center text-4xl font-bold">
-            Your Topics
-          </h1>
-
           <main className="m-8 flex min-h-80 items-center justify-center">
             <TopicsCards />
           </main>
