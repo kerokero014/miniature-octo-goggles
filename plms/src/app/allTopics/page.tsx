@@ -36,7 +36,7 @@ export default function Page() {
 
         <div className="relative isolate px-6 pt-14 lg:px-8">
           <Header />
-          <main className="m-8 flex min-h-80 flex-col items-center justify-center">
+          <main className="my-8 flex min-h-80 flex-col items-center justify-center">
             <TopicsCards />
 
             {/* Button to add a new topic */}
