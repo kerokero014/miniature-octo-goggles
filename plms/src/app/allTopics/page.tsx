@@ -23,8 +23,15 @@ export default function Page() {
 
         <div className="relative isolate px-6 pt-14 lg:px-8">
           <Header />
-          <main className="m-8 flex min-h-80 items-center justify-center">
+          <main className="m-8 flex min-h-80 flex-col items-center justify-center">
             <TopicsCards />
+
+            {/* Button to add a new topic */}
+            <Link href="/addTopic">
+              <button className="mt-4 rounded-full bg-blue-100 p-4 text-white shadow-lg transition-colors duration-200 hover:bg-slate-400">
+                <Image src="/imgs/add_icon.png" alt="Add a new topic" width={24} height={24} />
+              </button>
+            </Link>
           </main>
 
           <Footer />

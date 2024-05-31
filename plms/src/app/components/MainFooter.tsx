@@ -9,13 +9,13 @@ export default function MainFooter() {
           <p className="text-sm">© 2024 Your Company. All rights reserved.</p>
         </div>
         <div>
-          <Link href="/contact" className="mr-4 text-sm text-gray-300 hover:text-white">
+          <Link href="/contact" className="mr-4 text-sm text-gray-800 hover:text-white">
             Contact Us
           </Link>
-          <Link href="/privacy" className="mr-4 text-sm text-gray-300 hover:text-white">
+          <Link href="/privacy" className="mr-4 text-sm text-gray-800 hover:text-white">
             Privacy Policy
           </Link>
-          <Link href="/terms" className="mr-4 text-sm text-gray-300 hover:text-white">
+          <Link href="/terms" className="mr-4 text-sm text-gray-800 hover:text-white">
             Terms & Conditions
           </Link>
         </div>
