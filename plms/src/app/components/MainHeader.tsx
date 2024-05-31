@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function MainHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ export default function MainHeader() {
     <header className="absolute inset-x-0 top-0 z-50">
       <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">PLUMS</span>
             <Image
               className="h-8 w-auto"
@@ -22,7 +23,7 @@ export default function MainHeader() {
               width={100}
               height={100}
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -48,16 +49,16 @@ export default function MainHeader() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/Files" className="text-sm font-semibold leading-6 text-gray-900">
             Files
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/Images" className="text-sm font-semibold leading-6 text-gray-900">
             Images
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/Notes" className="text-sm font-semibold leading-6 text-gray-900">
             Notes
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/Links" className="text-sm font-semibold leading-6 text-gray-900">
             Links
           </a>
         </div>

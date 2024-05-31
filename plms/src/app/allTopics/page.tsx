@@ -1,10 +1,23 @@
+'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '../components/MainFooter';
 import Header from '../components/SecondaryHeader';
 import TopicsCards from '../components/TopicsCards';
+import CreateTopicForm from '../components/createTopicForm';
 
 export default function Page() {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleClick = () => {
+    setShowForm(true);
+  };
+
+  const handleClose = () => {
+    setShowForm(false);
+  };
+
   return (
     <>
       <div className="relative isolate px-6 pt-14 lg:px-7">
@@ -27,11 +40,15 @@ export default function Page() {
             <TopicsCards />
 
             {/* Button to add a new topic */}
-            <Link href="/addTopic">
-              <button className="mt-4 rounded-full bg-blue-100 p-4 text-white shadow-lg transition-colors duration-200 hover:bg-slate-400">
-                <Image src="/imgs/add_icon.png" alt="Add a new topic" width={24} height={24} />
+            <div>
+              <button
+                className="mt-4 rounded-full bg-blue-100 p-4 text-white shadow-lg transition-colors duration-200 hover:bg-slate-400"
+                onClick={handleClick}
+              >
+                <Image src="/imgs/add_icon.png" alt="Add a new topic" width={34} height={34} />
               </button>
-            </Link>
+              {showForm && <CreateTopicForm onClose={handleClose} />}
+            </div>
           </main>
 
           <Footer />
