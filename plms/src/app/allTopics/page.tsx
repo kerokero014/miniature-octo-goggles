@@ -6,6 +6,7 @@ import Footer from '../components/MainFooter';
 import Header from '../components/SecondaryHeader';
 import TopicsCards from '../components/TopicsCards';
 import CreateTopicForm from '../components/createTopicForm';
+import TestComponent from '../components/TestComponent';
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -20,6 +21,10 @@ export default function Page() {
 
   return (
     <>
+      <div>
+        <TestComponent />
+      </div>
+
       <div className="relative isolate px-6 pt-14 lg:px-7">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
