@@ -26,7 +26,7 @@ export default function TopicsCards() {
             <AddSubTopic />
 
             <Link href="/topics/react" className="font-bold hover:text-blue-800">
-              Items...
+              Click to see content...
             </Link>
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function TopicsCards() {
             <AddSubTopic />
 
             <Link href="/topics/react" className="font-bold hover:text-blue-800">
-              Items...
+              click to see content...
             </Link>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function TopicsCards() {
             <AddSubTopic />
 
             <Link href="/topics/react" className="font-bold hover:text-blue-800">
-              Items...
+              click to see content...
             </Link>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function TopicsCards() {
             <AddSubTopic />
 
             <Link href="/topics/react" className="font-bold hover:text-blue-800">
-              Items...
+              click to see content...
             </Link>
           </div>
         </div>
