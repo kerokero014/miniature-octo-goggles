@@ -49,23 +49,23 @@ export default function MainHeader() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          <a href="/Files" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link href="/Files" className="text-sm font-semibold leading-6 text-gray-900">
             Files
-          </a>
-          <a href="/Images" className="text-sm font-semibold leading-6 text-gray-900">
+          </Link>
+          <Link href="/Images" className="text-sm font-semibold leading-6 text-gray-900">
             Images
-          </a>
-          <a href="/Notes" className="text-sm font-semibold leading-6 text-gray-900">
+          </Link>
+          <Link href="/Notes" className="text-sm font-semibold leading-6 text-gray-900">
             Notes
-          </a>
-          <a href="/Links" className="text-sm font-semibold leading-6 text-gray-900">
+          </Link>
+          <Link href="/Links" className="text-sm font-semibold leading-6 text-gray-900">
             Links
-          </a>
+          </Link>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link href="#" className="text-sm font-semibold leading-6 text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
         </div>
       </nav>
 
