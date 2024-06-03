@@ -25,7 +25,7 @@ export default function TopicsCards() {
 
             <AddSubTopic />
 
-            <Link href="/topics/react" className="font-bold hover:text-blue-800">
+            <Link href="/topics/{id}" className="font-bold hover:text-blue-800">
               Click to see content...
             </Link>
           </div>
