@@ -45,8 +45,8 @@ export default function AllTopics({ topics, setTopics }: AllTopicsProps) {
     <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {topics.map((topic) => (
         <div className="transform transition duration-100 ease-in-out hover:-translate-y-1 hover:scale-110">
-          <div className="h-full overflow-hidden rounded-lg shadow-lg hover:shadow-2xl">
-            <div className="flex h-full flex-col bg-white p-6 dark:bg-gray-800">
+          <div className="bg-slate-800 p-1 h-full overflow-hidden rounded-lg shadow-lg hover:shadow-2xl">
+            <div className="flex h-full flex-col p-6 dark:bg-violet-400">
               <Link key={topic.id} href={`/allTopics/${topic.id}`} className="block font-semibold">
                 <Topic id={topic.id} title={topic.title} description={topic.description} />
               </Link>
