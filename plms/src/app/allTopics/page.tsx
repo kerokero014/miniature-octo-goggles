@@ -1,15 +1,29 @@
+// src/app/allTopics/page.tsx
+
 'use client';
+
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '../components/MainFooter';
 import Header from '../components/SecondaryHeader';
-import TopicsCards from '../components/TopicsCards';
+import AllTopics from '../components/AllTopics';
 import CreateTopicForm from '../components/createTopicForm';
-import TestComponent from '../components/TestComponent';
+import StaticBg from '../components/StaticBg';
+
+interface Topic {
+  id: number;
+  title: string;
+  description: string;
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+}
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
+  const [topics, setTopics] = useState<Topic[]>([]);
+  const [userId] = useState(1); // Example: assume userId is 1 for now
 
   const handleClick = () => {
     setShowForm(true);
@@ -19,32 +33,19 @@ export default function Page() {
     setShowForm(false);
   };
 
+  const handleTopicCreated = (newTopic: Topic) => {
+    setTopics((prevTopics) => [...prevTopics, newTopic]);
+    setShowForm(false);
+  };
+
   return (
     <>
-      <div>
-        <TestComponent />
-      </div>
-
       <div className="relative isolate px-6 pt-14 lg:px-7">
-        <div
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
-            }}
-          ></div>
-        </div>
-
+        <StaticBg />
         <div className="relative isolate px-6 pt-14 lg:px-8">
           <Header />
           <main className="my-8 flex min-h-80 flex-col items-center justify-center">
-            <TopicsCards />
-
-            {/* Button to add a new topic */}
+            <AllTopics topics={topics} setTopics={setTopics} />
             <div>
               <button
                 className="mt-4 rounded-full bg-blue-100 p-4 text-white shadow-lg transition-colors duration-200 hover:bg-slate-400"
@@ -52,24 +53,16 @@ export default function Page() {
               >
                 <Image src="/imgs/add_icon.png" alt="Add a new topic" width={34} height={34} />
               </button>
-              {showForm && <CreateTopicForm onClose={handleClose} />}
+              {showForm && (
+                <CreateTopicForm
+                  user_id={userId}
+                  onClose={handleClose}
+                  onTopicCreated={handleTopicCreated}
+                />
+              )}
             </div>
           </main>
-
           <Footer />
-        </div>
-
-        <div
-          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
-            }}
-          ></div>
         </div>
       </div>
     </>

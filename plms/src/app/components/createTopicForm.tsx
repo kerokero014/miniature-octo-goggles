@@ -1,18 +1,46 @@
 import React, { FormEvent, useState } from 'react';
 
 interface CreateTopicFormProps {
+  user_id: number;
   onClose: () => void;
+  onTopicCreated: (topic: {
+    id: number;
+    title: string;
+    description: string;
+    user_id: number;
+    created_at: string;
+    updated_at: string;
+  }) => void;
 }
 
-function CreateTopicForm({ onClose }: CreateTopicFormProps) {
+const CreateTopicForm = ({ user_id, onClose, onTopicCreated }: CreateTopicFormProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log('Title:', title);
-    console.log('Description:', description);
-    console.log('Form submitted');
+
+    try {
+      const response = await fetch('/api/topic', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title, description, user_id })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add topic');
+      }
+
+      const newTopic = await response.json();
+      onTopicCreated(newTopic);
+      setTitle('');
+      setDescription('');
+    } catch (error) {
+      setError((error as Error).message);
+    }
   };
 
   return (
@@ -45,6 +73,7 @@ function CreateTopicForm({ onClose }: CreateTopicFormProps) {
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                      required
                     />
                   </label>
                   <label className="block">
@@ -53,8 +82,10 @@ function CreateTopicForm({ onClose }: CreateTopicFormProps) {
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                       className="mt-1 block h-20 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:h-32"
+                      required
                     />
                   </label>
+                  {error && <p className="text-red-500">{error}</p>}
                   <input
                     type="submit"
                     value="Create Topic"
@@ -77,6 +108,6 @@ function CreateTopicForm({ onClose }: CreateTopicFormProps) {
       </div>
     </div>
   );
-}
+};
 
 export default CreateTopicForm;
