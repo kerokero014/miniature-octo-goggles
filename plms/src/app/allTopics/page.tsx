@@ -2,12 +2,11 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import Footer from '../components/MainFooter';
 import Header from '../components/SecondaryHeader';
-import AllTopics from '../components/AllTopics';
+import AllTopics from '../components/AllTopics'; // Ensure correct import
 import CreateTopicForm from '../components/createTopicForm';
 import StaticBg from '../components/StaticBg';
 
@@ -24,6 +23,22 @@ export default function Page() {
   const [showForm, setShowForm] = useState(false);
   const [topics, setTopics] = useState<Topic[]>([]);
   const [userId] = useState(1); // Example: assume userId is 1 for now
+
+  useEffect(() => {
+    const loadTopics = async () => {
+      try {
+        const response = await fetch('/api/topic');
+        if (!response.ok) {
+          throw new Error('Failed to fetch topics');
+        }
+        const fetchedTopics = await response.json();
+        setTopics(fetchedTopics);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    loadTopics();
+  }, []);
 
   const handleClick = () => {
     setShowForm(true);
