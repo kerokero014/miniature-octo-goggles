@@ -16,6 +16,5 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
   }
 }
 
-
 // TODO: GET & DELETE endpoints for notes
 // export async function GET()
