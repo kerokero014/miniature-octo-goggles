@@ -66,19 +66,19 @@ export default function AllTopics({ topics, setTopics }: AllTopicsProps) {
         <div className="transform transition duration-100 ease-in-out hover:-translate-y-1 hover:scale-110">
           <div className="h-full overflow-hidden rounded-lg bg-slate-800 p-1 shadow-lg hover:shadow-2xl">
             <div className="flex h-full flex-col p-6 dark:bg-violet-400">
-              {/* <Link
+              <Link
                 href={`/allTopics/${topic.topic_id}`}
                 className="block cursor-pointer font-semibold"
                 passHref
-              > */}
-              <Topic
-                key={topic.topic_id}
-                topic_id={topic.topic_id}
-                title={topic.title}
-                description={topic.description}
-                onDelete={handleDelete}
-              />
-              {/* </Link> */}
+              >
+                <Topic
+                  key={topic.topic_id}
+                  topic_id={topic.topic_id}
+                  title={topic.title}
+                  description={topic.description}
+                  onDelete={handleDelete}
+                />
+              </Link>
             </div>
           </div>
         </div>

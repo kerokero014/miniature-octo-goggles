@@ -1,18 +1,10 @@
-import MainFooter from '@/app/components/MainFooter';
-import MainHeader from '@/app/components/MainHeader';
-import StaticBg from '@/app/components/StaticBg';
+//src/app/allTopics/[id]/page.tsx
 
-export default function Page() {
+
+export default function TopicPage() {
   return (
-    <>
-      <MainHeader />
-      <StaticBg />
-
-      <div>
-        <h1>Topic 1</h1>
-      </div>
-
-      <MainFooter />
-    </>
+    <div>
+      <h1>Topic #</h1>
+    </div>
   );
 }
