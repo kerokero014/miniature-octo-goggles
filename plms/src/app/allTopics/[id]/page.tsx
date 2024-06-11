@@ -1,5 +1,3 @@
-//src/app/allTopics/[id]/page.tsx
-
 
 export default function TopicPage() {
   return (

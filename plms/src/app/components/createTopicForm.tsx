@@ -4,7 +4,7 @@ interface CreateTopicFormProps {
   user_id: number;
   onClose: () => void;
   onTopicCreated: (topic: {
-    id: number;
+    topic_id: number;
     title: string;
     description: string;
     user_id: number;
