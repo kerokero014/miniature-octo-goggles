@@ -15,3 +15,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     return NextResponse.json({ error: 'Failed to delete topic' }, { status: 500 });
   }
 }
+
+
+// TODO: GET & DELETE endpoints for notes
+// export async function GET()
