@@ -1,6 +1,7 @@
-import Note from '../../Data/Note.model';
+'use client';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import Note from '../../Data/Note.model';
 
 interface Topic {
   topic_id: number;
@@ -47,11 +48,15 @@ export default function TopicPage() {
       </div>
       <div>
         <h2 className="text-lg font-semibold text-gray-900">Notes</h2>
-        <ul className="mt-2 list-inside list-disc text-gray-600">
-          {topic.notes.map((note) => (
-            <li key={note.note_id}>{note.note_content}</li>
-          ))}
-        </ul>
+        {topic.notes.length > 0 ? (
+          <ul className="mt-2 list-inside list-disc text-gray-600">
+            {topic.notes.map((note) => (
+              <li key={note.note_id}>{note.note_content}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-2 text-gray-600">No notes available.</p>
+        )}
       </div>
     </div>
   );

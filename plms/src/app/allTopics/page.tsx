@@ -22,7 +22,7 @@ interface Topic {
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
   const [topics, setTopics] = useState<Topic[]>([]);
-  const [userId] = useState(1); // Example: assume userId is 1 for now
+  const [userId] = useState(1);
 
   useEffect(() => {
     const loadTopics = async () => {
@@ -34,7 +34,11 @@ export default function Page() {
         const fetchedTopics = await response.json();
         setTopics(fetchedTopics);
       } catch (error) {
-        console.error(error);
+        if (error instanceof Error) {
+          console.error(error.message);
+        } else {
+          console.error('An unexpected error occurred', error);
+        }
       }
     };
     loadTopics();
