@@ -1,12 +1,12 @@
-import primsa from '../../../../prisma/client';
+import prisma from '../../../../prisma/client';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const topic = await primsa.topics.findMany();
-    return NextResponse.json(topic, { status: 200 });
+    const topics = await prisma.topics.findMany();
+    return NextResponse.json(topics, { status: 200 });
   } catch (error) {
-    console.error('Error fetching topics: ', error);
+    console.error('Error fetching topics:', error);
     return NextResponse.json({ error: 'Error fetching topics' }, { status: 500 });
   }
 }
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const topic = await primsa.topics.create({
+    const topic = await prisma.topics.create({
       data: {
         title,
         description,
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     });
     return NextResponse.json(topic, { status: 201 });
   } catch (error) {
-    console.error('Error creating topic: ', error);
+    console.error('Error creating topic:', error);
     return NextResponse.json({ error: 'Error creating topic' }, { status: 500 });
   }
 }

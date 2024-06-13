@@ -1,12 +1,10 @@
-// src/app/allTopics/page.tsx
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Footer from '../components/MainFooter';
 import Header from '../components/SecondaryHeader';
-import AllTopics from '../components/AllTopics'; // Ensure correct import
+import AllTopics from '../components/AllTopics';
 import CreateTopicForm from '../components/createTopicForm';
 import StaticBg from '../components/StaticBg';
 
@@ -34,11 +32,7 @@ export default function Page() {
         const fetchedTopics = await response.json();
         setTopics(fetchedTopics);
       } catch (error) {
-        if (error instanceof Error) {
-          console.error(error.message);
-        } else {
-          console.error('An unexpected error occurred', error);
-        }
+        console.error(error);
       }
     };
     loadTopics();

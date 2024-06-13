@@ -1,4 +1,3 @@
-// src/app/api/topic/[id]/route.ts
 import { NextResponse } from 'next/server';
 import prisma from '../../../../../prisma/client';
 
@@ -16,15 +15,13 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
   }
 }
 
-
-// export async function GET() notes 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   const { id } = params;
 
   try {
     const topic = await prisma.topics.findUnique({
       where: { topic_id: parseInt(id, 10) },
-      include: { notes: true } // Ensure notes are included in the response
+      include: { notes: true }
     });
 
     if (!topic) {
@@ -37,6 +34,3 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     return NextResponse.json({ error: 'Failed to fetch topic' }, { status: 500 });
   }
 }
-
-
-// POST function to create a new note
