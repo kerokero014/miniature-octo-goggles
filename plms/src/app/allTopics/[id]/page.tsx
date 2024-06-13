@@ -1,20 +1,11 @@
 'use client';
-import { useRouter } from 'next/router'; // Corrected import for useRouter
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import Note from '../../Data/Note.model';
-
-interface Topic {
-  topic_id: number;
-  title: string;
-  description: string;
-  user_id: number;
-  created_at: string;
-  updated_at: string;
-  notes: Note[];
-}
+// import Note from '../../Data/Note.model';
+import Topic from '../../Data/Topic.model';
 
 export default function TopicPage() {
-  const router = useRouter(); 
+  const router = useRouter();
   const { id } = router.query;
   const [topic, setTopic] = useState<Topic | null>(null);
 
