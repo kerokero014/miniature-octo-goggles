@@ -21,7 +21,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   try {
     const topic = await prisma.topics.findUnique({
       where: { topic_id: parseInt(id, 10) },
-      include: { notes: true }
+      include: { notes: true } // Ensure notes are included in the response
     });
 
     if (!topic) {

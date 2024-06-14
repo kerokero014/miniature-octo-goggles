@@ -1,12 +1,14 @@
 'use client';
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-// import Note from '../../Data/Note.model';
+import NoteCard from '../../components/NoteCard';
 import Topic from '../../Data/Topic.model';
+import MainFooter from '@/app/components/MainFooter';
+import MainHeader from '@/app/components/MainHeader';
+import StaticBg from '@/app/components/StaticBg';
 
 export default function TopicPage() {
-  const router = useRouter();
-  const { id } = router.query;
+  const { id } = useParams(); // Correctly use useParams from next/navigation
   const [topic, setTopic] = useState<Topic | null>(null);
 
   useEffect(() => {
@@ -32,23 +34,27 @@ export default function TopicPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-sm items-center space-x-4 rounded-xl bg-white p-6 shadow-md">
-      <div className="flex-shrink-0">
-        <h1 className="text-xl font-semibold text-gray-900">{topic.title}</h1>
-        <p className="mt-2 text-gray-600">{topic.description}</p>
+    <>
+      <MainHeader />
+      <StaticBg />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12">
+          <h1 className="text-5xl font-bold leading-tight text-gray-900">{topic.title}</h1>
+        </div>
+        <div>
+          <h2 className="mb-6 text-3xl font-semibold text-gray-900">Notes</h2>
+          {topic.notes.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {topic.notes.map((note) => (
+                <NoteCard key={note.note_id} note={note} />
+              ))}
+            </div>
+          ) : (
+            <p className="mt-2 text-lg text-gray-600">No notes available.</p>
+          )}
+        </div>
       </div>
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900">Notes</h2>
-        {topic.notes.length > 0 ? (
-          <ul className="mt-2 list-inside list-disc text-gray-600">
-            {topic.notes.map((note) => (
-              <li key={note.note_id}>{note.note_content}</li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-2 text-gray-600">No notes available.</p>
-        )}
-      </div>
-    </div>
+      <MainFooter />
+    </>
   );
 }

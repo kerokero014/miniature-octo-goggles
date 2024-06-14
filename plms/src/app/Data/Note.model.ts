@@ -5,5 +5,4 @@ interface Note {
   created_at: string;
 }
 
-
 export default Note;
