@@ -40,6 +40,12 @@ export default function TopicPage() {
     }
   };
 
+  const handleNoteDeleted = (noteId: number) => {
+    if (topic) {
+      setTopic({ ...topic, notes: topic.notes.filter((note) => note.note_id !== noteId) });
+    }
+  };
+
   if (!topic) {
     return <div className="flex items-center justify-center p-4 text-blue-500">Loading...</div>;
   }
@@ -62,7 +68,7 @@ export default function TopicPage() {
           {topic.notes.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {topic.notes.map((note) => (
-                <NoteCard key={note.note_id} note={note} />
+                <NoteCard key={note.note_id} note={note} onDelete={handleNoteDeleted} />
               ))}
             </div>
           ) : (

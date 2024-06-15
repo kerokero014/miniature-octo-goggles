@@ -5,8 +5,8 @@ export default function MainFooter() {
     <footer className="fixed bottom-0 w-full px-6 py-4 text-black">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg">Your Company</h3>
-          <p className="text-sm">© 2024 Your Company. All rights reserved.</p>
+          <h3 className="text-lg">PLUMS</h3>
+          <p className="text-sm">© 2024 PLUMS All rights reserved.</p>
         </div>
         <div>
           <Link href="/contact" className="mr-4 text-sm text-gray-800 hover:text-white">
