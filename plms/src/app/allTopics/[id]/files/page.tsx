@@ -4,11 +4,11 @@
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import FileModalForm from '../../../components/FileModalForm';
-import File from '../../../Data/File.model'; // Ensure the correct path
+import FileModel from '../../../Data/File.model';
 
 export default function FilesPage() {
   const { id } = useParams();
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<FileModel[]>([]);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -29,27 +29,19 @@ export default function FilesPage() {
     }
   }, [id]);
 
-  const handleFileCreated = (newFile: File) => {
+  const handleFileCreated = (newFile: FileModel) => {
     setFiles((prevFiles) => [...prevFiles, newFile]);
-    setShowModal(false);
   };
 
   return (
     <div className="mx-auto max-w-4xl p-6">
       <h1 className="text-2xl font-semibold text-gray-900">Files</h1>
       <button
+        className="my-4 rounded-md bg-blue-600 px-4 py-2 text-white"
         onClick={() => setShowModal(true)}
-        className="my-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
-        Add New File
+        Upload New File
       </button>
-      {showModal && (
-        <FileModalForm
-          topicId={Array.isArray(id) ? parseInt(id[0], 10) : parseInt(id, 10)}
-          onClose={() => setShowModal(false)}
-          onFileCreated={handleFileCreated}
-        />
-      )}
       {files.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {files.map((file) => (
@@ -71,6 +63,13 @@ export default function FilesPage() {
         </div>
       ) : (
         <p className="mt-2 text-gray-600">No files available.</p>
+      )}
+      {showModal && (
+        <FileModalForm
+          topicId={Array.isArray(id) ? parseInt(id[0], 10) : parseInt(id, 10)}
+          onClose={() => setShowModal(false)}
+          onFileCreated={handleFileCreated}
+        />
       )}
     </div>
   );
