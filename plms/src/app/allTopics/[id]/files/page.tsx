@@ -3,11 +3,13 @@
 'use client';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import File from '../../../Data/File.model';
+import FileModalForm from '../../../components/FileModalForm';
+import File from '../../../Data/File.model'; // Ensure the correct path
 
 export default function FilesPage() {
   const { id } = useParams();
   const [files, setFiles] = useState<File[]>([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -27,18 +29,43 @@ export default function FilesPage() {
     }
   }, [id]);
 
+  const handleFileCreated = (newFile: File) => {
+    setFiles((prevFiles) => [...prevFiles, newFile]);
+    setShowModal(false);
+  };
+
   return (
     <div className="mx-auto max-w-4xl p-6">
       <h1 className="text-2xl font-semibold text-gray-900">Files</h1>
+      <button
+        onClick={() => setShowModal(true)}
+        className="my-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
+        Add New File
+      </button>
+      {showModal && (
+        <FileModalForm
+          topicId={Array.isArray(id) ? parseInt(id[0], 10) : parseInt(id, 10)}
+          onClose={() => setShowModal(false)}
+          onFileCreated={handleFileCreated}
+        />
+      )}
       {files.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {files.map((file) => (
-            <div key={file.file_id} className="p-4 border rounded-lg shadow-sm bg-white">
-              <a href={file.file_path} target="_blank" rel="noopener noreferrer" className="text-blue-600">
+            <div key={file.file_id} className="rounded-lg border bg-white p-4 shadow-sm">
+              <a
+                href={file.file_path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600"
+              >
                 {file.file_name}
               </a>
               <p className="mt-2 text-gray-800">{file.file_type}</p>
-              <p className="text-sm text-gray-500 mt-2">{new Date(file.created_at).toLocaleString()}</p>
+              <p className="mt-2 text-sm text-gray-500">
+                {new Date(file.created_at).toLocaleString()}
+              </p>
             </div>
           ))}
         </div>
