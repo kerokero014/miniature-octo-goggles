@@ -8,10 +8,12 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
   try {
     const links = await prisma.links.findMany({
-      where: {
-        topic_id: parseInt(id, 10)
-      }
+      where: { topic_id: parseInt(id, 10) }
     });
+
+    if (!links) {
+      return NextResponse.json({ error: 'Links not found' }, { status: 404 });
+    }
 
     return NextResponse.json(links, { status: 200 });
   } catch (error) {

@@ -1,90 +1,106 @@
-'use client';
-
+// src/app/components/FileModalForm.tsx
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import File from '../Data/File.model';
 
 interface FileModalFormProps {
   topicId: number;
   onClose: () => void;
-  onFileCreated: (newFile: File) => void;
+  onFileCreated: (newFile: any) => void; // Adjust FileModel type as needed
 }
 
-export default function FileModalForm({ topicId, onClose, onFileCreated }: FileModalFormProps) {
-  const [file, setFile] = useState<globalThis.File | null>(null); // Use the global File type
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+const FileModalForm: React.FC<FileModalFormProps> = ({ topicId, onClose, onFileCreated }) => {
+  const [fileData, setFile] = useState<File | null>(null); // State to hold the selected file
+  const [fileName, setFileName] = useState<string>('');
+  const [fileType, setFileType] = useState<string>('');
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!file) return;
+  const handleFileNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFileName(event.target.value);
+  };
 
-    setIsLoading(true);
+  const handleFileTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFileType(event.target.value);
+  };
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('topic_id', topicId.toString());
+  const handleFileUpload = async () => {
+    if (fileData && fileName && fileType) {
+      try {
+        const formData = new FormData();
+        formData.append('file_name', fileName);
+        formData.append('file_data', fileData); // Directly append file to FormData
+        formData.append('file_type', fileType);
 
-    try {
-      const response = await fetch(`/api/topic/${topicId}/files`, {
-        method: 'POST',
-        body: formData
-      });
+        const response = await fetch(`/api/topic/${topicId}/files`, {
+          method: 'POST',
+          body: formData,
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to upload file');
+        if (!response.ok) {
+          throw new Error('Failed to upload file');
+        }
+
+        const newFile = await response.json();
+        onFileCreated(newFile); // Notify parent component of new file creation
+
+        onClose(); // Close modal after successful upload
+      } catch (error) {
+        console.error('Error uploading file:', error);
       }
-
-      const newFile = await response.json();
-      onFileCreated(newFile);
-      onClose();
-      router.refresh(); // Refresh the page to show the new file
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    } finally {
-      setIsLoading(false);
+    } else {
+      console.error('Missing file, file name, or file type');
     }
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-      <div className="rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-semibold">Upload a New File</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <input
-              type="file"
-              id="file"
-              name="file"
-              accept=""
-              onChange={handleFileChange}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:rounded-full file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-700 hover:file:bg-blue-100"
-            />
-          </div>
-          <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={onClose}
-              className="mr-4 rounded-md bg-gray-300 px-4 py-2 text-gray-800"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="rounded-md bg-blue-600 px-4 py-2 text-white"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Uploading...' : 'Upload'}
-            </button>
-          </div>
-        </form>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="rounded-md bg-white p-4 shadow-md">
+        <h2 className="mb-4 text-lg font-semibold">Upload File</h2>
+        <div className="mb-4">
+          <label htmlFor="file">Choose File:</label>
+          <input type="file" id="file" name="file" onChange={handleFileChange} />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="file-name">File Name:</label>
+          <input
+            type="text"
+            id="file-name"
+            name="file-name"
+            value={fileName}
+            onChange={handleFileNameChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="file-type">File Type:</label>
+          <input
+            type="text"
+            id="file-type"
+            name="file-type"
+            value={fileType}
+            onChange={handleFileTypeChange}
+          />
+        </div>
+        <div className="flex justify-end">
+          <button
+            className="mr-2 rounded-md bg-purple-500 px-4 py-2 text-white hover:bg-purple-600"
+            onClick={handleFileUpload}
+          >
+            Upload
+          </button>
+          <button
+            className="rounded-md bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default FileModalForm;
