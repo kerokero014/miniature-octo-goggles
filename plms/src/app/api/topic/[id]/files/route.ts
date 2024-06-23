@@ -2,6 +2,8 @@
 import { NextResponse } from 'next/server';
 import { Request } from 'express';
 import prisma from '../../../../../../prisma/client';
+import { bufferToBase64 } from '../../../../utils/index';
+import multer from 'multer';
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   const { id } = params;
@@ -22,30 +24,4 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
-  const { file_name, file_data, file_type } = req.body;
 
-  if (!file_name || !file_data || !file_type) {
-    return NextResponse.json(
-      { error: 'file name, file data, and file type are required' },
-      { status: 400 }
-    );
-  }
-
-  try {
-    const newFile = await prisma.files.create({
-      data: {
-        topic_id: parseInt(id, 10),
-        file_name,
-        file_data: Buffer.from(file_data, 'base64'), // Convert base64 string to bytes
-        file_type
-      }
-    });
-
-    return NextResponse.json(newFile, { status: 201 });
-  } catch (error) {
-    console.error('Error creating file:', error);
-    return NextResponse.json({ error: 'Failed to create file' }, { status: 500 });
-  }
-}

@@ -2,7 +2,7 @@
 
 'use client';
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation'; // Import useParams from next/navigation
+import { useParams } from 'next/navigation';
 import FileModalForm from '../../../components/FileModalForm';
 import FileModel from '../../../Data/File.model';
 import MainHeader from '@/app/components/MainHeader';

@@ -1,4 +1,4 @@
-// src/app/components/FileModalForm.tsx
+'use client';
 import { useState } from 'react';
 
 interface FileModalFormProps {
@@ -37,7 +37,7 @@ const FileModalForm: React.FC<FileModalFormProps> = ({ topicId, onClose, onFileC
 
         const response = await fetch(`/api/topic/${topicId}/files`, {
           method: 'POST',
-          body: formData,
+          body: formData
         });
 
         if (!response.ok) {
