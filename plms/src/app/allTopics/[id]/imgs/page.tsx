@@ -54,22 +54,24 @@ export default function ImagesPage() {
         </button>
         {images.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {images.map((image) => (
-              <div
-                key={image.image_id}
-                className="relative rounded-xl border border-gray-200 bg-white p-4 shadow-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
-              >
-                <DeleteButton id={image.image_id} entity="image" onDelete={handleImageDeleted} />
-                <img
-                  src={`data:image/webp;base64,${image.image_data}`}
-                  alt="Image"
-                  className="h-auto w-full rounded-lg object-cover"
-                />
-                <p className="mt-2 text-sm font-semibold text-gray-600">
-                  {new Date(image.created_at).toLocaleString()}
-                </p>
-              </div>
-            ))}
+            <div className="rounded-2xl bg-purple-500 p-3 transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl">
+              {images.map((image) => (
+                <div
+                  key={image.image_id}
+                  className="relative rounded-xl border border-gray-200 bg-white p-4 shadow-lg "
+                >
+                  <DeleteButton id={image.image_id} entity="image" onDelete={handleImageDeleted} />
+                  <img
+                    src={`data:image/webp;base64,${image.image_data}`}
+                    alt="Image"
+                    className="h-auto w-full rounded-lg object-cover"
+                  />
+                  <p className="mt-2 text-sm font-semibold text-gray-600">
+                    {new Date(image.created_at).toLocaleString()}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <p className="mt-2 text-gray-600">No images available.</p>
